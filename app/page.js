@@ -108,7 +108,7 @@ Please provide thoughtful, compassionate prompts that will genuinely help this p
           </p>
 
           {/* ============================================================ */}
-          {/* FORM SECTION - All the input fields */}
+          {/* FORM SECTION - All the input fields! */}
           {/* ============================================================ */}
           <div className="space-y-6">
             
