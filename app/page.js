@@ -24,6 +24,10 @@ export default function Home() {
     numPrompts: '3-5'
   });
 
+  const [customIssue, setCustomIssue] = useState('');
+  const [customLens, setCustomLens] = useState('');
+  const [customStyle, setCustomStyle] = useState('');
+
   const [prompts, setPrompts] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -39,16 +43,31 @@ export default function Home() {
     }));
   };
 
+  const handleCustomChange = (fieldName, value) => {
+    if (fieldName === 'issue') setCustomIssue(value);
+    if (fieldName === 'lens') setCustomLens(value);
+    if (fieldName === 'style') setCustomStyle(value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
     setPrompts('');
+
+    // Prepare form data with custom values if "Other" is selected
+    const submitData = {
+      ...formData,
+      issue: formData.issue === 'Other' ? customIssue : formData.issue,
+      lens: formData.lens === 'Other' ? customLens : formData.lens,
+      style: formData.style === 'Other' ? customStyle : formData.style,
+    };
+
     try {
       const response = await fetch('/api/generate-prompts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submitData),
       });
       if (!response.ok) throw new Error('Failed to generate prompts');
       const data = await response.json();
@@ -104,7 +123,19 @@ export default function Home() {
                   <option value="Health concerns">Health concerns</option>
                   <option value="Family dynamics">Family dynamics</option>
                   <option value="Financial stress">Financial stress</option>
+                  <option value="Other">Other</option>
                 </select>
+                {formData.issue === 'Other' && (
+                  <input
+                    type="text"
+                    placeholder="Describe your life situation"
+                    value={customIssue}
+                    onChange={(e) => handleCustomChange('issue', e.target.value)}
+                    required
+                    className="form-input-custom"
+                    style={{ marginTop: '0.5rem' }}
+                  />
+                )}
               </div>
 
               {/* Philosophical/Spiritual Lens Selection */}
@@ -119,7 +150,19 @@ export default function Home() {
                   <option value="Secular humanism">Secular humanism</option>
                   <option value="Cognitive behavioral therapy">Cognitive behavioral therapy</option>
                   <option value="Positive psychology">Positive psychology</option>
+                  <option value="Other">Other</option>
                 </select>
+                {formData.lens === 'Other' && (
+                  <input
+                    type="text"
+                    placeholder="Describe your philosophical or spiritual perspective"
+                    value={customLens}
+                    onChange={(e) => handleCustomChange('lens', e.target.value)}
+                    required
+                    className="form-input-custom"
+                    style={{ marginTop: '0.5rem' }}
+                  />
+                )}
               </div>
 
               {/* Writing Style Selection */}
@@ -132,7 +175,19 @@ export default function Home() {
                   <option value="Creative and imaginative">Creative and imaginative</option>
                   <option value="Analytical and structured">Analytical and structured</option>
                   <option value="Compassionate and supportive">Compassionate and supportive</option>
+                  <option value="Other">Other</option>
                 </select>
+                {formData.style === 'Other' && (
+                  <input
+                    type="text"
+                    placeholder="Describe your preferred style or focus"
+                    value={customStyle}
+                    onChange={(e) => handleCustomChange('style', e.target.value)}
+                    required
+                    className="form-input-custom"
+                    style={{ marginTop: '0.5rem' }}
+                  />
+                )}
               </div>
             </div>
 
