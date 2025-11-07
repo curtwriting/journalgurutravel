@@ -151,20 +151,23 @@ export default function Home() {
         display: 'flex',
         flexDirection: 'column'
       }}>
-        {/* Header Section - Title and Description */}
+        {/* Header Section - Logo and Description */}
         <div style={{
           textAlign: 'center',
           marginBottom: '3rem'
         }}>
-          <h1 style={{
-            fontSize: '2.5rem',
-            fontWeight: '700',
-            color: colors.text,
-            marginBottom: '0.75rem',
-            letterSpacing: '-0.5px'
-          }}>
-            Journal Guru
-          </h1>
+          <img 
+            src="/journal-guru-logo.jpg" 
+            alt="Journal Guru"
+            style={{
+              maxWidth: '400px',
+              width: '100%',
+              height: 'auto',
+              marginBottom: '1.5rem',
+              borderRadius: '1rem',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+            }}
+          />
           <p style={{
             fontSize: '1.125rem',
             color: colors.textLight,
@@ -199,7 +202,7 @@ export default function Home() {
                   fontSize: '0.95rem',
                   fontWeight: '600',
                   color: colors.text
-                }}>I am...</label>
+                }}>I am</label>
                 <select id="age" name="age" value={formData.age} onChange={handleInputChange} required style={selectStyles(colors)}
                 onFocus={(e) => e.target.style.borderColor = colors.primary}
                 onBlur={(e) => e.target.style.borderColor = colors.border}
@@ -225,7 +228,7 @@ export default function Home() {
                 onFocus={(e) => e.target.style.borderColor = colors.primary}
                 onBlur={(e) => e.target.style.borderColor = colors.border}
                 >
-                  <option value="">Select your focus</option>
+                  <option value="">Select your situation</option>
                   <option value="Career transition">Career transition</option>
                   <option value="Relationship challenges">Relationship challenges</option>
                   <option value="Personal growth">Personal growth</option>
