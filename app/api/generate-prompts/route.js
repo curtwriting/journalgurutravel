@@ -59,22 +59,25 @@ export async function POST(request) {
 
     // Create a detailed prompt that tells the AI exactly what we want
     const prompt = `You are a thoughtful journaling coach helping someone develop meaningful self-reflection practices. Please create ${promptCount} journal prompt${numPrompts === '1' ? '' : 's'} for the following person:
+        Age Range: ${age}
+        Life Situation: ${issue}
+        Philosophical/Spiritual Lens: ${lens}
+        Style/Focus: ${style}
 
-Age Range: ${age}
-Life Situation: ${issue}
-Philosophical/Spiritual Lens: ${lens}
-Style/Focus: ${style}
+        Requirements:
+        - Tailor the language and complexity to be age-appropriate for someone in the ${age} age range
+        - Focus specifically on helping them explore "${issue}"
+        - Frame the prompts through a ${lens} perspective, incorporating relevant principles and wisdom from this tradition
+        - Use a ${style} style/tone in crafting these prompts
+        - Make each prompt open-ended to encourage deep reflection
+        - Ensure prompts are specific enough to be actionable but broad enough to allow personal interpretation
+        - Include gentle guidance on how to approach the prompt if helpful
 
-Requirements:
-- Tailor the language and complexity to be age-appropriate for someone in the ${age} age range
-- Focus specifically on helping them explore "${issue}"
-- Frame the prompts through a ${lens} perspective, incorporating relevant principles and wisdom from this tradition
-- Use a ${style} style/tone in crafting these prompts
-- Make each prompt open-ended to encourage deep reflection
-- Ensure prompts are specific enough to be actionable but broad enough to allow personal interpretation
-- Include gentle guidance on how to approach the prompt if helpful
-
-Please provide thoughtful, compassionate prompts that will genuinely help this person gain insight and clarity.`;
+        Please provide thoughtful, compassionate prompts that will genuinely help this person gain insight and clarity.
+        
+        OUTPUT INSTRUCTIONS: Generate ONLY the requested journal prompts and any associated guidance. 
+        DO NOT include any introductory or concluding conversational remarks, or any questions about elaboration or follow-up. 
+        Stop generating text immediately after the final prompt.`;
 
     console.log('Calling Claude API...');
 
