@@ -12,8 +12,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Journal Guru",
-  description: "Generate personalized journal prompts tailored to your life situation, age, and philosophical perspective.",
+  title: "Journal Guru Travel",
+  description: "Generate personalized journal prompts tailored to your travel experience.",
+  icons: {
+    icon: '/journal-guru-logo.jpg'
+  }
 };
 
 export default function RootLayout({ children }) {
