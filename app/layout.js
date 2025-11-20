@@ -19,7 +19,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
+      {/* <head>
         <script
           strategy='lazyOnload'
           src={`https://www.googletagmanager.com/gtag/js?id=G-DJF5D5KP4L`}
@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
                 });
             `}
         </script>
-      </head>
+      </head> */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
