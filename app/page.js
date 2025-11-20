@@ -178,7 +178,7 @@ export default function Home() {
           marginBottom: '3rem'
         }}>
           <img 
-            src="/journal-guru-logo.jpg" 
+            src="/Traveler v2.jpg" 
             alt="Journal Guru"
             style={{
               maxWidth: '400px',
