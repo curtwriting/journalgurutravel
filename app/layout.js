@@ -19,22 +19,22 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* <head>
+      <head>
         <script
           strategy='lazyOnload'
-          src={`https://www.googletagmanager.com/gtag/js?id=G-DJF5D5KP4L`}
+          src={`https://www.googletagmanager.com/gtag/js?id=G-SRJS5BGK7L`}
         />
         <script id='' strategy='lazyOnload'>
           {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', 'G-DJF5D5KP4L', {
+                gtag('config', 'G-SRJS5BGK7L', {
                 page_path: window.location.pathname,
                 });
             `}
         </script>
-      </head> */}
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
