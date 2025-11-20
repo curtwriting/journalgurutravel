@@ -31,10 +31,10 @@ export async function POST(request) {
     // ============================================================
     
     // Get the form data sent from the frontend
-    const { age, issue, lens, style, numPrompts } = await request.json();
+    const { moment, sensory, tension, person, concept } = await request.json();
 
     // Check that all required fields are provided
-    if (!age || !issue || !lens || !style || !numPrompts) {
+    if (!moment || !sensory || !tension || !person || !concept) {
       return NextResponse.json({ 
         error: 'Missing required fields' 
       }, { status: 400 }); // 400 = Bad Request
@@ -55,19 +55,16 @@ export async function POST(request) {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       // Generate mock prompts based on user input
-      const promptCount = numPrompts === '3-5' ? 4 : parseInt(numPrompts);
-      const mockPrompts = Array.from({ length: promptCount }, (_, i) => {
-        return `**Journal Prompt ${i + 1}**
+      const mockPrompts =  `**Travel Journal Prompt**
 
-          Reflect on your experience with ${issue} through the lens of ${lens}. Consider how the principles of this perspective can guide you in navigating this situation.
+          Reflect on your experience with ${moment} through the lens of ${sensory}. Consider how the principles of this perspective can guide you in navigating this situation.
 
           Take a moment to explore:
-          - What aspects of ${issue} feel most challenging right now?
-          - How might ${lens} offer insights or tools to help you approach this differently?
-          - What would it look like to apply a ${style.toLowerCase()} approach to understanding this situation?
+          - What aspects of ${moment} feel most challenging right now?
+          - How might ${sensory} offer insights or tools to help you approach this differently?
+          - What would it look like to apply a ${tension} approach to understanding this situation?
 
           Write freely, allowing your thoughts to flow without judgment.`;
-                }).join('\n\n---\n\n');
       
       return NextResponse.json({ prompts: mockPrompts });
     }
@@ -82,22 +79,20 @@ export async function POST(request) {
     // STEP 3: PREPARE THE AI PROMPT
     // ============================================================
     
-    // Convert "3-5" to "3 to 5" for better readability in the prompt
-    const promptCount = numPrompts === '3-5' ? '3 to 5' : numPrompts;
-
     // Create a detailed prompt that tells the AI exactly what we want
-    const prompt = `You are a thoughtful journaling coach helping someone develop meaningful self-reflection practices. Please create ${promptCount} journal prompt${numPrompts === '1' ? '' : 's'} for the following person:
-        Age Range: ${age}
-        Life Situation: ${issue}
-        Philosophical/Spiritual Lens: ${lens}
-        Style/Focus: ${style}
+    const prompt = `You are a thoughtful journaling coach helping someone develop meaningful self-reflection practices. Please create a journal prompt for the following person:
+        Moment: ${moment}
+        Sensory: ${sensory}
+        Tension: ${tension}
+        Person: ${person}
+        Concept: ${concept}
 
         Requirements:
-        - Tailor the language and complexity to be age-appropriate for someone in the ${age} age range
-        - Focus specifically on helping them explore "${issue}"
-        - Frame the prompts through a ${lens} perspective, incorporating relevant principles and wisdom from this tradition
-        - Use a ${style} style/tone in crafting these prompts
-        - Make each prompt open-ended to encourage deep reflection
+        - Tailor the language and complexity to be appropriate for someone in the ${moment} moment
+        - Focus specifically on helping them explore "${moment}"
+        - Frame the prompts through a ${sensory} perspective, incorporating relevant principles and wisdom from this tradition
+        - Use a ${tension} style/tone in crafting these prompts
+        - Make the prompt open-ended to encourage deep reflection
         - Ensure prompts are specific enough to be actionable but broad enough to allow personal interpretation
         - Include gentle guidance on how to approach the prompt if helpful
 
